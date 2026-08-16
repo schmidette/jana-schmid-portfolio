@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".js-email-link").forEach((link) => {
+    const address = `${link.dataset.user}@${link.dataset.domain}`;
+    link.href = `mailto:${address}`;
+    link.textContent = address;
+  });
+
   const toggle = document.querySelector(".nav-toggle");
   const links = document.querySelector(".nav-links");
 
@@ -27,9 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function initLightbox(images) {
   let current = 0;
+  let triggerEl = null;
 
   const overlay = document.createElement("div");
   overlay.className = "lightbox-overlay";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-label", "Bildansicht");
   overlay.innerHTML = `
     <button class="lightbox-close" aria-label="Schliessen">&times;</button>
     <button class="lightbox-prev" aria-label="Vorheriges Bild">&#8592;</button>
@@ -42,6 +52,7 @@ function initLightbox(images) {
   const closeBtn = overlay.querySelector(".lightbox-close");
   const prevBtn = overlay.querySelector(".lightbox-prev");
   const nextBtn = overlay.querySelector(".lightbox-next");
+  const focusable = [prevBtn, nextBtn, closeBtn];
 
   function show(index) {
     current = (index + images.length) % images.length;
@@ -49,20 +60,31 @@ function initLightbox(images) {
     imgEl.alt = images[current].alt || "";
   }
 
-  function open(index) {
+  function open(index, trigger) {
+    triggerEl = trigger;
     show(index);
     overlay.classList.add("is-open");
     document.body.style.overflow = "hidden";
+    closeBtn.focus();
   }
 
   function close() {
     overlay.classList.remove("is-open");
     document.body.style.overflow = "";
+    if (triggerEl) triggerEl.focus();
   }
 
   images.forEach((img, index) => {
     img.classList.add("is-zoomable");
-    img.addEventListener("click", () => open(index));
+    img.setAttribute("tabindex", "0");
+    img.setAttribute("role", "button");
+    img.addEventListener("click", () => open(index, img));
+    img.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        open(index, img);
+      }
+    });
   });
 
   closeBtn.addEventListener("click", close);
@@ -75,8 +97,24 @@ function initLightbox(images) {
 
   document.addEventListener("keydown", (event) => {
     if (!overlay.classList.contains("is-open")) return;
-    if (event.key === "Escape") close();
+
+    if (event.key === "Escape") {
+      close();
+      return;
+    }
     if (event.key === "ArrowLeft") show(current - 1);
     if (event.key === "ArrowRight") show(current + 1);
+
+    if (event.key === "Tab") {
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
   });
 }

@@ -1,0 +1,5 @@
+sources/
+.git/
+.gitignore
+.DS_Store
+wrangler.toml

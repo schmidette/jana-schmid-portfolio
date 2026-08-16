@@ -6,6 +6,19 @@
   <title>Jana Schmid, UX/UI Designerin</title>
   <meta name="description" content="Jana Schmid, UX/UI Designerin & Visual Design. Portfolio und Lebenslauf." />
 
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Jana Schmid, UX/UI Designerin" />
+  <meta property="og:description" content="Jana Schmid, UX/UI Designerin & Visual Design. Portfolio und Lebenslauf." />
+  <meta property="og:image" content="https://www.design.schmipa.ch/assets/img/image-jana@2x.png" />
+  <meta property="og:url" content="https://www.design.schmipa.ch/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Jana Schmid, UX/UI Designerin" />
+  <meta name="twitter:description" content="Jana Schmid, UX/UI Designerin & Visual Design. Portfolio und Lebenslauf." />
+  <meta name="twitter:image" content="https://www.design.schmipa.ch/assets/img/image-jana@2x.png" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+
+  <link rel="preconnect" href="https://use.typekit.net" />
   <link rel="stylesheet" href="https://use.typekit.net/eyi5nvt.css">
 
   <link rel="stylesheet" href="css/reset.css" />
@@ -16,8 +29,8 @@
   <header class="site-header">
     <div class="container">
       <a href="#top" class="logo">jana<span>.</span>schmid</a>
-      <button class="nav-toggle" aria-expanded="false" aria-label="Menü öffnen">☰</button>
-      <nav class="nav-links">
+      <button class="nav-toggle" aria-expanded="false" aria-label="Menü öffnen" aria-controls="nav-links">☰</button>
+      <nav class="nav-links" id="nav-links">
         <a href="#about">Über mich</a>
         <a href="#experience">Erfahrung</a>
         <a href="#projects">Projekte</a>
@@ -57,13 +70,22 @@
           <h2 class="section-title">Über mich</h2>
         </div>
         <div class="about-copy">
-          <p class="about-text">
-            Ich bin UX/UI Designerin bei ePost Service AG (vormals KLARA Business AG) und gestalte
-            Interfaces für Mobile und Desktop in Figma, von Prototyping und User Research bis zur
-            Umsetzung mit Front-End Vibe-Coding. Davor habe ich als Media Designerin und
-            Mediamatikerin sämtliche Marketingmaterialien und Webseiten-Designs verantwortet.
-          </p>
-          <div class="chip-list">
+          <div class="about-text-block">
+            <p class="about-text">
+              Ich bin UX/UI &amp; Visual Designerin bei ePost Service AG (vormals KLARA Business AG) und
+              gestalte Interfaces für Mobile und Desktop: von ersten Figma-Prototypen über User Research
+              bis zur Umsetzung mit Front-End Vibe-Coding. Am meisten Freude macht mir dabei die
+              Zusammenarbeit im Team: gute Lösungen entstehen selten allein am Bildschirm, sondern im
+              Austausch mit Kolleginnen, Kollegen und Nutzerinnen.
+            </p>
+            <p class="about-text">
+              Diese Freude an Zusammenarbeit und daran, Wissen weiterzugeben, lebe ich auch ausserhalb
+              der Arbeit: Seit mehreren Jahren bin ich J+S Leiterin und Wertungsrichterin im
+              Geräteturnen. Ob im Design-Team oder in der Turnhalle, mich treibt dasselbe an: anderen
+              etwas beizubringen, gemeinsam an einer Sache zu wachsen und dabei genau hinzuschauen.
+            </p>
+          </div>
+          <div class="chip-list chip-list-col">
             <span class="chip">Empathisch</span>
             <span class="chip">Kritikfähig</span>
             <span class="chip">Selbstständig</span>
@@ -262,7 +284,7 @@
           <h2 class="section-title">Kontakt</h2>
         </div>
         <div class="contact-grid">
-          <div>E-Mail: <a href="mailto:jana.schmid@ikmail.com">jana.schmid@ikmail.com</a></div>
+          <div>E-Mail: <a class="js-email-link" href="#" data-user="jana.schmid" data-domain="ikmail.com">jana.schmid [at] ikmail.com</a></div>
           <div>Telefon: <a href="tel:+41798435185">079 843 51 85</a></div>
           <div>LinkedIn: <a href="https://linkedin.ch/jana-schmidpauli" target="_blank" rel="noopener">linkedin.ch/jana-schmidpauli</a></div>
           <div>Website: <a href="https://www.design.schmipa.ch" target="_blank" rel="noopener">www.design.schmipa.ch</a></div>
