@@ -396,23 +396,17 @@ a:focus-visible, button:focus-visible {
    Projects
    ============================================ */
 
-/* Mosaic grid: 3 columns as the base unit, but every 5th tile runs big
-   (2x2) and every 5th+2 runs tall (1x2). "dense" packs around them so
-   there are no gaps, however many projects there are. */
+/* Compact grid: the first project runs big (2x2), all others are equal
+   tiles. With 6 projects this fills a clean 3x3 block. */
 .project-grid {
   display: grid;
   gap: var(--space-3);
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 12rem;
-  grid-auto-flow: dense;
 }
 
-.project-card:nth-child(5n+1) {
+.project-card:first-child {
   grid-column: span 2;
-  grid-row: span 2;
-}
-
-.project-card:nth-child(5n+3) {
   grid-row: span 2;
 }
 
@@ -420,8 +414,11 @@ a:focus-visible, button:focus-visible {
   .project-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .project-card:nth-child(5n+1) {
+  /* 2 columns: an odd tile at the end would sit alone, so it runs wide */
+  .project-card:first-child,
+  .project-card:last-child:nth-child(even) {
     grid-column: span 2;
+    grid-row: span 1;
   }
 }
 
@@ -430,10 +427,9 @@ a:focus-visible, button:focus-visible {
     grid-template-columns: 1fr;
     grid-auto-rows: 16rem;
   }
-  .project-card:nth-child(5n+1),
-  .project-card:nth-child(5n+3) {
+  .project-card:first-child,
+  .project-card:last-child:nth-child(even) {
     grid-column: span 1;
-    grid-row: span 1;
   }
 }
 
@@ -456,15 +452,16 @@ a:focus-visible, button:focus-visible {
   height: 100%;
 }
 
-img.project-thumb {
+img.project-thumb,
+video.project-thumb {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
 }
 
-.project-card-link:hover img.project-thumb,
-.project-card-link:focus-visible img.project-thumb {
+.project-card-link:hover .project-thumb,
+.project-card-link:focus-visible .project-thumb {
   transform: scale(1.03);
 }
 
@@ -646,6 +643,38 @@ img.project-thumb {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-accent);
+}
+
+/* Motion design page: one block per video */
+.motion-list {
+  display: grid;
+  gap: var(--space-5);
+}
+.motion-item {
+  max-width: 56rem;
+}
+
+.motion-item h2 {
+  margin-top: 0.3rem;
+}
+
+.motion-item p:last-child {
+  max-width: 42rem;
+  color: #33352e;
+}
+
+.case-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--color-sage-soft);
+  border-radius: var(--radius);
+  margin-block: var(--space-2);
+}
+
+.case-video-square {
+  aspect-ratio: 1 / 1;
+  max-width: 28rem;
 }
 
 .case-img {

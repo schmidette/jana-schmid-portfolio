@@ -22,6 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Respect reduced motion: stop looping videos and show the poster instead.
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.querySelectorAll(".js-autoplay-loop").forEach((video) => {
+      video.removeAttribute("autoplay");
+      video.pause();
+    });
+  }
+
   const galleryImages = Array.from(
     document.querySelectorAll(".case-figure-img, .case-gallery img")
   );
